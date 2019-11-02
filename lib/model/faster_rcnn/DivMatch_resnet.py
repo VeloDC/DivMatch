@@ -12,7 +12,6 @@ from torch.autograd import Variable
 import math
 import torch.utils.model_zoo as model_zoo
 import pdb
-from model.faster_rcnn.faster_rcnn import _fasterRCNN
 
 __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
        'resnet152']
@@ -218,19 +217,25 @@ def resnet152(pretrained=False):
     model.load_state_dict(model_zoo.load_url(model_urls['resnet152']))
   return model
 
-class resnet(_fasterRCNN):
+class resnet(_da_fasterRCNN):
   def __init__(self, classes, num_layers=101, pretrained=False, class_agnostic=False):
     self.model_path = 'data/pretrained_model/resnet101_caffe.pth'
     self.dout_base_model = 1024
     self.pretrained = pretrained
     self.class_agnostic = class_agnostic
+    self.num_layers = num_layers
 
     _fasterRCNN.__init__(self, classes, class_agnostic)
 
   def _init_modules(self):
-    resnet = resnet101()
+    if self.num_layers == 50:
+      resnet = resnet50(pretrained=self.pretrained)
+    elif self.num_layers == 101:
+      resnet = resnet101()
+    elif self.num_layers == 152:
+      resnet = resnet152(pretrained=self.pretrained)
 
-    if self.pretrained == True:
+    if self.pretrained == True and self.num_layers==101:
       print("Loading pretrained weights from %s" %(self.model_path))
       state_dict = torch.load(self.model_path)
       resnet.load_state_dict({k:v for k,v in state_dict.items() if k in resnet.state_dict()})
