@@ -21,7 +21,7 @@ from model.rpn.anchor_target_layer import _AnchorTargetLayer
 class _da_fasterRCNN(nn.Module):
     """ faster RCNN """
     def __init__(self, classes, class_agnostic):
-        super(_fasterRCNN, self).__init__()
+        super(_da_fasterRCNN, self).__init__()
         self.classes = classes
         self.n_classes = len(classes)
         self.class_agnostic = class_agnostic

@@ -225,7 +225,7 @@ class resnet(_da_fasterRCNN):
     self.class_agnostic = class_agnostic
     self.num_layers = num_layers
 
-    _fasterRCNN.__init__(self, classes, class_agnostic)
+    _da_fasterRCNN.__init__(self, classes, class_agnostic)
 
   def _init_modules(self):
     if self.num_layers == 50:
