@@ -172,7 +172,7 @@ class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator, self).__init__()
         self.layers = nn.Sequential(
-            nn.Conv2d(512, 512, 1, bias=False),
+            nn.Conv2d(1024, 512, 1, bias=False),
             nn.ReLU(),
             nn.Conv2d(512, 4, 1, bias=False)
         )
