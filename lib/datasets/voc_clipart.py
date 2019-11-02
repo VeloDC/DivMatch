@@ -58,6 +58,7 @@ class voc_clipart(imdb):
         self._roidb_handler = self.gt_roidb
         self._salt = str(uuid.uuid4())
         self._comp_id = 'comp4'
+        self._year = 'clipart_' + split
 
         # PASCAL specific config options
         self.config = {'cleanup': True,
@@ -289,12 +290,12 @@ class voc_clipart(imdb):
     def _do_python_eval(self, output_dir='output'):
         annopath = os.path.join(
             self._devkit_path,
-            'VOC' + self._year,
+            #'VOC' + self._year,
             'Annotations',
             '{:s}.xml')
         imagesetfile = os.path.join(
             self._devkit_path,
-            'VOC' + self._year,
+            #'VOC' + self._year,
             'ImageSets',
             'Main',
             self._image_set + '.txt')

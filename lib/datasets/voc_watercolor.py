@@ -58,6 +58,7 @@ class voc_watercolor(imdb):
         self._roidb_handler = self.gt_roidb
         self._salt = str(uuid.uuid4())
         self._comp_id = 'comp4'
+        self._year = 'watercolor_' + split
 
         # PASCAL specific config options
         self.config = {'cleanup': True,
