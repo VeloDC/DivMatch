@@ -117,6 +117,9 @@ def combined_roidb(imdb_names, training=True):
   roidbs = [get_roidb(s) for s in imdb_names.split('+')]
   roidb = roidbs[0]
 
+  #import pdb
+  #pdb.set_trace()
+
   if len(roidbs) > 1:
     for r in roidbs[1:]:
       roidb.extend(r)

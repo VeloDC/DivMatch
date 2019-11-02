@@ -18,6 +18,10 @@ from datasets.voc_clipart import voc_clipart
 from datasets.voc_watercolor import voc_watercolor
 from datasets.voc_comic import voc_comic
 
+from datasets.clipart import clipart
+from datasets.comic import comic
+from datasets.watercolor import watercolor
+
 # Set up voc_<year>_<split>
 for year in ['2007', '2012']:
   for split in ['train', 'val', 'trainval', 'test']:
@@ -30,9 +34,21 @@ for split in ['trainval']:
         name = 'clipart{}_{}'.format(shift, split)
         __sets[name] = (lambda shift=shift, split=split: voc_clipart(shift, split, devkit_path=os.path.join('datasets/', 'clipart_{}'.format(shift))))
 
-for split in ['train', 'test', 'trainval']:        
+for split in ['train', 'trainval']:        
     name = 'clipart_{}'.format(split)
     __sets[name] = (lambda split=split: voc_clipart('', split, devkit_path=os.path.join('datasets/', 'clipart')))
+
+
+# test splits
+for split in ['test']:
+    name = 'clipart_{}'.format(split)
+    __sets[name] = (lambda split=split: clipart(split, devkit_path=os.path.join('datasets/', 'clipart')))
+
+    name = 'comic_{}'.format(split)
+    __sets[name] = (lambda split=split: comic(split, devkit_path=os.path.join('datasets/', 'comic')))
+
+    name = 'watercolor_{}'.format(split)
+    __sets[name] = (lambda split=split: watercolor(split, devkit_path=os.path.join('datasets/', 'watercolor')))
 
 # watercolor
 for split in ['trainval']:
@@ -40,7 +56,7 @@ for split in ['trainval']:
         name = 'watercolor{}_{}'.format(shift, split)
         __sets[name] = (lambda shift=shift, split=split: voc_watercolor('', split, devkit_path=os.path.join('datasets/', 'watercolor_{}'.format(shift))))
 
-for split in ['train', 'test', 'trainval']:
+for split in ['train', 'trainval']:
     name = 'watercolor_{}'.format(split)
     __sets[name] = (lambda split=split: voc_watercolor('', split, devkit_path=os.path.join('datasets/', 'watercolor')))
 
@@ -50,7 +66,7 @@ for split in ['trainval']:
         name = 'comics{}_{}'.format(shift, split)
         __sets[name] = (lambda shift=shift, split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic_{}'.format(shift))))
 
-for split in ['train', 'test', 'trainval']: 
+for split in ['train', 'trainval']: 
     name = 'comic_{}'.format(split)
     __sets[name] = (lambda split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic')))
 
