@@ -59,7 +59,7 @@ for split in ['trainval']:
 # VOC comic
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
-        name = 'comics{}_{}'.format(shift, split)
+        name = 'comic{}_{}'.format(shift, split)
         __sets[name] = (lambda shift=shift, split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic_{}'.format(shift))))
     name = 'comic_{}'.format(split)
     __sets[name] = (lambda split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic')))
