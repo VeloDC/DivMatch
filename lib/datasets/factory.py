@@ -28,19 +28,17 @@ for year in ['2007', '2012']:
     name = 'voc_{}_{}'.format(year, split)
     __sets[name] = (lambda split=split, year=year: pascal_voc(split, year, devkit_path='../faster-rcnn.pytorch/data/VOCdevkit2007'))
 
-# clipart
+# VOC clipart
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
         name = 'clipart{}_{}'.format(shift, split)
         __sets[name] = (lambda shift=shift, split=split: voc_clipart(shift, split, devkit_path=os.path.join('datasets/', 'clipart_{}'.format(shift))))
-
-for split in ['train', 'trainval']:        
     name = 'clipart_{}'.format(split)
     __sets[name] = (lambda split=split: voc_clipart('', split, devkit_path=os.path.join('datasets/', 'clipart')))
 
 
-# test splits
-for split in ['test']:
+# AMD training / test splits
+for split in ['test', 'train']:
     name = 'clipart_{}'.format(split)
     __sets[name] = (lambda split=split: clipart(split, devkit_path=os.path.join('datasets/', 'clipart')))
 
@@ -50,23 +48,19 @@ for split in ['test']:
     name = 'watercolor_{}'.format(split)
     __sets[name] = (lambda split=split: watercolor(split, devkit_path=os.path.join('datasets/', 'watercolor')))
 
-# watercolor
+# VOC watercolor
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
         name = 'watercolor{}_{}'.format(shift, split)
         __sets[name] = (lambda shift=shift, split=split: voc_watercolor('', split, devkit_path=os.path.join('datasets/', 'watercolor_{}'.format(shift))))
-
-for split in ['train', 'trainval']:
     name = 'watercolor_{}'.format(split)
     __sets[name] = (lambda split=split: voc_watercolor('', split, devkit_path=os.path.join('datasets/', 'watercolor')))
 
-# comic
+# VOC comic
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
         name = 'comics{}_{}'.format(shift, split)
         __sets[name] = (lambda shift=shift, split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic_{}'.format(shift))))
-
-for split in ['train', 'trainval']: 
     name = 'comic_{}'.format(split)
     __sets[name] = (lambda split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic')))
 
