@@ -42,6 +42,11 @@ class _da_fasterRCNN(nn.Module):
 
 
     def forward(self, im_data, im_info, gt_boxes, num_boxes, need_backprop=None, dc_label=None):
+        #import pdb
+        #pdb.set_trace()
+        im_data = torch.stack((im_data[0,2],im_data[0,1],im_data[0,0])).unsqueeze(dim=0) # color channel swap 
+        im_data = im_data / 256    # bring it back to pytorch range
+        im_data = im_data / 0.226  # divide by imagenet std (speed approximation)
         batch_size = im_data.size(0)
 
         im_info = im_info.data
