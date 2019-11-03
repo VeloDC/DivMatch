@@ -158,13 +158,14 @@ if __name__ == '__main__':
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    if args.dataset in ["clipart", "watercolor", "comic"]:
+    #if args.dataset in ["clipart", "watercolor", "comic"]:
+    if 'clipart' in args.dataset or 'watercolor' in args.dataset or 'comic' in args.dataset:
         print(args.dataset)
         args.imdb_name = "voc_integrated_trainval"
         args.imdbval_name = args.dataset + "_train"
-        args.imdb_shifted1_name = args.dataset + "CP_trainval"
-        args.imdb_shifted2_name = args.dataset + "R_trainval"
-        args.imdb_shifted3_name = args.dataset + "CPR_trainval"
+        args.imdb_shifted1_name = args.dataset + "_CP_trainval"
+        args.imdb_shifted2_name = args.dataset + "_R_trainval"
+        args.imdb_shifted3_name = args.dataset + "_CPR_trainval"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
     elif args.dataset == "cityscapes":

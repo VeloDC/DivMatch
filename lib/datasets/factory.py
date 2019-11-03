@@ -31,38 +31,49 @@ for year in ['2007', '2012']:
 # VOC clipart
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
-        name = 'clipart{}_{}'.format(shift, split)
-        __sets[name] = (lambda shift=shift, split=split: voc_clipart(shift, split, devkit_path=os.path.join('datasets/', 'clipart_{}'.format(shift))))
-    name = 'clipart_{}'.format(split)
-    __sets[name] = (lambda split=split: voc_clipart('', split, devkit_path=os.path.join('datasets/', 'clipart')))
+      for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
+        name = 'clipart{}_{}_{}'.format(data_percentage_split, shift, split)
+        __sets[name] = (lambda shift=shift, split=split, data_percentage_split=data_percentage_split: voc_clipart('clipart{}'.format(data_percentage_split), shift, split, devkit_path=os.path.join('datasets/', 'clipart{}_{}'.format(data_percentage_split, shift))))
 
 
-# AMD training / test splits
-for split in ['test', 'train']:
-    name = 'clipart_{}'.format(split)
-    __sets[name] = (lambda split=split: clipart(split, devkit_path=os.path.join('datasets/', 'clipart')))
+# AMD  test splits
+for split in ['test']:
+    data_percentage_split = ''
+    name = 'clipart{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: clipart('clipart{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'clipart{}'.format(data_percentage_split))))
 
-    name = 'comic_{}'.format(split)
-    __sets[name] = (lambda split=split: comic(split, devkit_path=os.path.join('datasets/', 'comic')))
+    name = 'comic{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: comic('comic{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'comic{}'.format(data_percentage_split))))
 
-    name = 'watercolor_{}'.format(split)
-    __sets[name] = (lambda split=split: watercolor(split, devkit_path=os.path.join('datasets/', 'watercolor')))
+    name = 'watercolor{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: watercolor('watercolor{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'watercolor{}'.format(data_percentage_split))))
+
+# AMD train splits
+  
+for split in ['train']:
+  for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
+    name = 'clipart{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: clipart('clipart{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'clipart{}'.format(data_percentage_split))))
+
+    name = 'comic{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: comic('comic{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'comic{}'.format(data_percentage_split))))
+
+    name = 'watercolor{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: watercolor('watercolor{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'watercolor{}'.format(data_percentage_split))))
 
 # VOC watercolor
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
-        name = 'watercolor{}_{}'.format(shift, split)
-        __sets[name] = (lambda shift=shift, split=split: voc_watercolor('', split, devkit_path=os.path.join('datasets/', 'watercolor_{}'.format(shift))))
-    name = 'watercolor_{}'.format(split)
-    __sets[name] = (lambda split=split: voc_watercolor('', split, devkit_path=os.path.join('datasets/', 'watercolor')))
+      for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
+        name = 'watercolor{}_{}_{}'.format(data_percentage_split, shift, split)
+        __sets[name] = (lambda shift=shift, split=split, data_percentage_split=data_percentage_split: voc_watercolor('watercolor{}'.format(data_percentage_split), shift, split, devkit_path=os.path.join('datasets/', 'watercolor{}_{}'.format(data_percentage_split, shift))))
 
 # VOC comic
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
-        name = 'comic{}_{}'.format(shift, split)
-        __sets[name] = (lambda shift=shift, split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic_{}'.format(shift))))
-    name = 'comic_{}'.format(split)
-    __sets[name] = (lambda split=split: voc_comic('', split, devkit_path=os.path.join('datasets/', 'comic')))
+      for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
+        name = 'comic{}_{}_{}'.format(data_percentage_split, shift, split)
+        __sets[name] = (lambda shift=shift, split=split, data_percentage_split=data_percentage_split: voc_comic('comic{}'.format(data_percentage_split), shift, split, devkit_path=os.path.join('datasets/', 'comic{}_{}'.format(data_percentage_split, shift))))
 
 # Set up voc_integrated
 for split in ['trainval']:

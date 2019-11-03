@@ -38,8 +38,8 @@ except NameError:
 
 
 class clipart(imdb):
-    def __init__(self, image_set, devkit_path=None):
-        imdb.__init__(self, 'clipart_' + image_set)
+    def __init__(self, dataset_name, image_set, devkit_path=None):
+        imdb.__init__(self, dataset_name + '_' + image_set)
         self._image_set = image_set
         self._devkit_path = self._get_default_path() if devkit_path is None \
             else devkit_path

@@ -38,8 +38,8 @@ except NameError:
 
 
 class voc_clipart(imdb):
-    def __init__(self, shift, split, devkit_path=None):
-        imdb.__init__(self, 'clipart{}_{}'.format(shift, split))
+    def __init__(self, name, shift, split, devkit_path=None):
+        imdb.__init__(self, name + '_{}_{}'.format(shift, split))
         self._image_set = split
         self._devkit_path = self._get_default_path() if devkit_path is None \
             else devkit_path
