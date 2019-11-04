@@ -323,8 +323,8 @@ class comic(imdb):
         print('~~~~~~~~')
         print('Results:')
         for ap in aps:
-            print('{:.4f}'.format(ap))
-        print('{:.4f}'.format(np.mean(aps)))
+            print('{:.3f}'.format(ap))
+        print('{:.3f}'.format(np.mean(aps)))
         print('~~~~~~~~')
         print('')
         print('--------------------------------------------------------------')
