@@ -168,12 +168,12 @@ if __name__ == '__main__':
         args.imdb_shifted3_name = args.dataset + "_CPR_trainval"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
-    elif args.dataset == "cityscapes":
-        args.imdb_name = "cityscapes_train"
-        args.imdbval_name = "foggy_cityscapes_val"
-        args.imdbguide_name = "CityscapesCP_train"
-        args.imdbguide2_name = "CityscapesR_train"
-        args.imdbguide3_name = "CityscapesCPR_train"
+    elif 'cityscapes' in args.dataset:
+        args.imdb_name = args.dataset + "_train"
+        args.imdbval_name = "foggy_test"
+        args.imdb_shifted1_name = args.dataset + "_CP"
+        args.imdb_shifted2_name = args.dataset + "_R"
+        args.imdb_shifted3_name = args.dataset + "_CPR"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
     args.cfg_file = "cfgs/{}_ls.yml".format(args.net) if args.large_scale else "cfgs/{}.yml".format(args.net)

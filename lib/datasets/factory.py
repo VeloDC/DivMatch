@@ -21,6 +21,8 @@ from datasets.voc_comic import voc_comic
 from datasets.clipart import clipart
 from datasets.comic import comic
 from datasets.watercolor import watercolor
+from datasets.cityscapes import cityscapes
+
 
 # Set up voc_<year>_<split>
 for year in ['2007', '2012']:
@@ -67,6 +69,18 @@ for split in ['trainval']:
       for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
         name = 'watercolor{}_{}_{}'.format(data_percentage_split, shift, split)
         __sets[name] = (lambda shift=shift, split=split, data_percentage_split=data_percentage_split: voc_watercolor('watercolor{}'.format(data_percentage_split), shift, split, devkit_path=os.path.join('datasets/', 'watercolor{}_{}'.format(data_percentage_split, shift))))
+
+# cityscapes
+for split in ['cityscapes_train', 'foggy_train', 'foggy_test']:
+    name = split
+    __sets[name] = (lambda split=split: cityscapes(name=split, image_set=split, devkit_path=os.path.join('datasets', 'voc_cityscapes')))
+
+
+for shift in ['CP', 'CPR', 'R']:
+    for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
+        name = "cityscapes{}_{}".format(data_percentage_split, shift)
+        split = "cityscapes_train"
+        __sets[name] = (lambda name=name, split=split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
 
 # VOC comic
 for split in ['trainval']:
