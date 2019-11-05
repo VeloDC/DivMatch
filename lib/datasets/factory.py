@@ -71,16 +71,22 @@ for split in ['trainval']:
         __sets[name] = (lambda shift=shift, split=split, data_percentage_split=data_percentage_split: voc_watercolor('watercolor{}'.format(data_percentage_split), shift, split, devkit_path=os.path.join('datasets/', 'watercolor{}_{}'.format(data_percentage_split, shift))))
 
 # cityscapes
-for split in ['cityscapes_train', 'foggy_train', 'foggy_test']:
+for split in ['cityscapes_train', 'foggy_test']:
     name = split
     __sets[name] = (lambda split=split: cityscapes(name=split, image_set=split, devkit_path=os.path.join('datasets', 'voc_cityscapes')))
 
-
-for shift in ['CP', 'CPR', 'R']:
+for split in ['cityscapes_train', 'foggy_train']:
     for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
-        name = "cityscapes{}_{}".format(data_percentage_split, shift)
-        split = "cityscapes_train"
-        __sets[name] = (lambda name=name, split=split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
+        if split == "cityscapes_train":
+            for shift in ['CP', 'CPR', 'R']:
+                name = "cityscapes{}_{}".format(data_percentage_split, shift)
+                split = "cityscapes_train"
+                __sets[name] = (lambda name=name, split=split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
+        else: # foggy train: we need foggy_train, foggy_1_00_train, foggy_1_01_train and foggy_1_02_train
+            name = "foggy{}_train".format(data_percentage_split)
+            split_file = "foggy_train"
+            dataset_name = "voc_cityscapes{}".format(data_percentage_split)
+            __sets[name] = (lambda name=name, split=split_file, dataset_name=dataset_name: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', dataset_name)))
 
 # VOC comic
 for split in ['trainval']:

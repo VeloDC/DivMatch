@@ -169,8 +169,11 @@ if __name__ == '__main__':
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
     elif 'cityscapes' in args.dataset:
-        args.imdb_name = args.dataset + "_train"
-        args.imdbval_name = "foggy_test"
+        # imdb_name set is the source
+        args.imdb_name = "cityscapes_train"
+        dataset_split = args.dataset.replace("cityscapes", "")
+        # imdbval is the target set to be used to adapt
+        args.imdbval_name = "foggy{}_train".format(dataset_split)
         args.imdb_shifted1_name = args.dataset + "_CP"
         args.imdb_shifted2_name = args.dataset + "_R"
         args.imdb_shifted3_name = args.dataset + "_CPR"
