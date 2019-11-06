@@ -22,7 +22,6 @@ from datasets.clipart import clipart
 from datasets.comic import comic
 from datasets.watercolor import watercolor
 from datasets.cityscapes import cityscapes
-from datasets.amds import amds
 
 
 # Set up voc_<year>_<split>
