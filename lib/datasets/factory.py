@@ -22,6 +22,7 @@ from datasets.clipart import clipart
 from datasets.comic import comic
 from datasets.watercolor import watercolor
 from datasets.cityscapes import cityscapes
+from datasets.amds import amds
 
 
 # Set up voc_<year>_<split>
@@ -30,13 +31,16 @@ for year in ['2007', '2012']:
     name = 'voc_{}_{}'.format(year, split)
     __sets[name] = (lambda split=split, year=year: pascal_voc(split, year, devkit_path='../faster-rcnn.pytorch/data/VOCdevkit2007'))
 
-# VOC clipart
+# VOC clipart + amds
 for split in ['trainval']:
     for shift in ['CP', 'R', 'CPR']:
       for data_percentage_split in ['', '_1_00', '_1_01', '_1_02']:
+        # clipart
         name = 'clipart{}_{}_{}'.format(data_percentage_split, shift, split)
         __sets[name] = (lambda shift=shift, split=split, data_percentage_split=data_percentage_split: voc_clipart('clipart{}'.format(data_percentage_split), shift, split, devkit_path=os.path.join('datasets/', 'clipart{}_{}'.format(data_percentage_split, shift))))
-
+        # amds
+        name = 'amds{}_{}_{}'.format(data_percentage_split, shift, split)
+        __sets[name] = (lambda shift=shift, split=split, data_percentage_split=data_percentage_split: voc_clipart('amds{}'.format(data_percentage_split), shift, split, devkit_path=os.path.join('datasets/', 'amds{}_{}'.format(data_percentage_split, shift))))
 
 # AMD  test splits
 for split in ['test']:
@@ -50,6 +54,8 @@ for split in ['test']:
     name = 'watercolor{}_{}'.format(data_percentage_split, split)
     __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: watercolor('watercolor{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'watercolor{}'.format(data_percentage_split))))
 
+    name = 'amds{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: clipart('amds{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'amds{}'.format(data_percentage_split))))
 # AMD train splits
   
 for split in ['train']:
@@ -62,6 +68,9 @@ for split in ['train']:
 
     name = 'watercolor{}_{}'.format(data_percentage_split, split)
     __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: watercolor('watercolor{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'watercolor{}'.format(data_percentage_split))))
+
+    name = 'amds{}_{}'.format(data_percentage_split, split)
+    __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: clipart('amds{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'amds{}'.format(data_percentage_split))))
 
 # VOC watercolor
 for split in ['trainval']:
