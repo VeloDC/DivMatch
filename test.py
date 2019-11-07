@@ -125,14 +125,14 @@ if __name__ == '__main__':
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
     np.random.seed(cfg.RNG_SEED)
-    if args.dataset in ["clipart", "watercolor", "comic"]:
+    if args.dataset in ["clipart", "watercolor", "comic", "amds"]:
         args.imdb_name = "voc_integrated_trainval"
         args.imdbval_name = args.dataset + "_test"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
-    elif args.dataset == "cityscapes":
+    elif "cityscapes" in args.dataset:
         args.imdb_name = "cityscapes_train"
-        args.imdbval_name = "foggy_cityscapes_val"
+        args.imdbval_name = "foggy_test"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
     args.cfg_file = "cfgs/{}_ls.yml".format(args.net) if args.large_scale else "cfgs/{}.yml".format(args.net)
@@ -155,7 +155,7 @@ if __name__ == '__main__':
         raise Exception('There is no input directory for loading network from ' + input_dir)
     load_name = os.path.join(input_dir,
                          #    'foggy_ImgMultiGRL4_trainval_1_0_90000.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
-    			'clipart_DivMatch_trainval_{}_{}.pth'.format(args.checksession, args.checkpoint))
+    			'{}_DivMatch_trainval_{}_{}.pth'.format(args.dataset, args.checksession, args.checkpoint))
 
     # initilize the network here.
     if args.net == 'vgg16':
