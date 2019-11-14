@@ -125,9 +125,11 @@ if __name__ == '__main__':
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
     np.random.seed(cfg.RNG_SEED)
-    if args.dataset in ["clipart", "watercolor", "comic", "amds"]:
+    if "clipart" in args.dataset or "watercolor" in args.dataset or "comic" in args.dataset or "amds" in args.dataset:
         args.imdb_name = "voc_integrated_trainval"
-        args.imdbval_name = args.dataset + "_test"
+
+        ds_name = args.dataset.split("_")[0]
+        args.imdbval_name = ds_name + "_test"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
     elif "cityscapes" in args.dataset:
