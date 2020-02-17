@@ -100,7 +100,7 @@ def parse_args():
                         default=0, type=int) 
     parser.add_argument('--checkpoint', dest='checkpoint',
                         help='checkpoint to load network',
-                        default=74000, type=int)
+                        default=80000, type=int)
     parser.add_argument('--vis', dest='vis',
                         help='visualization mode',
                         action='store_true')
@@ -130,6 +130,11 @@ if __name__ == '__main__':
 
         ds_name = args.dataset.split("_")[0]
         args.imdbval_name = ds_name + "_test"
+        args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
+
+    elif "bicycle" in args.dataset:
+        args.imdb_name = "voc_integrated_trainval"
+        args.imdbval_name = args.dataset + "_test"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
     elif "cityscapes" in args.dataset:

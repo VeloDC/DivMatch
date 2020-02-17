@@ -159,7 +159,7 @@ if __name__ == '__main__':
         os.makedirs(output_dir)
 
     #if args.dataset in ["clipart", "watercolor", "comic"]:
-    if 'clipart' in args.dataset or 'watercolor' in args.dataset or 'comic' in args.dataset or 'amds' in args.dataset:
+    if 'clipart' in args.dataset or 'watercolor' in args.dataset or 'comic' in args.dataset or 'amds' in args.dataset or 'bicycle' in args.dataset:
         print(args.dataset)
         args.imdb_name = "voc_integrated_trainval"
         args.imdbval_name = args.dataset + "_train"
