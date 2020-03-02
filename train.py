@@ -168,12 +168,29 @@ if __name__ == '__main__':
         args.imdb_shifted3_name = args.dataset + "_CPR_trainval"
         args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
 
-    elif 'cityscapes' in args.dataset:
+    elif 'cityscapes2foggy' in args.dataset:
         # imdb_name set is the source
         args.imdb_name = "cityscapes_train"
-        dataset_split = args.dataset.replace("cityscapes", "")
+
+        # split is something like '_10_0' or '_10_samples'
+        dataset_split = args.dataset.replace("cityscapes2foggy", "")
+
         # imdbval is the target set to be used to adapt
-        args.imdbval_name = "foggy{}_train".format(dataset_split)
+        args.imdbval_name = "foggy{}_train".format(dataset_split) # something like: foggy_10_0_train or foggy_10_samples_train
+
+        # shifted versions are e.g. cityscapes2foggy_10_0_CPR or cityscapes2foggy_10_samples_CPR ...
+        args.imdb_shifted1_name = args.dataset + "_CP"
+        args.imdb_shifted2_name = args.dataset + "_R"
+        args.imdb_shifted3_name = args.dataset + "_CPR"
+        args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
+    
+    elif 'cityscapes2kitti' in args.dataset:
+        # imdb_name set is the source
+        args.imdb_name = "cityscapes_train"
+        dataset_split = args.dataset.replace("cityscapes2kitti", "")
+
+        # imdbval is the target set to be used to adapt
+        args.imdbval_name = "kitti{}_train".format(dataset_split)
         args.imdb_shifted1_name = args.dataset + "_CP"
         args.imdb_shifted2_name = args.dataset + "_R"
         args.imdb_shifted3_name = args.dataset + "_CPR"

@@ -94,17 +94,27 @@ for split in ['cityscapes_train', 'foggy_test']:
     name = split
     __sets[name] = (lambda split=split: cityscapes(name=split, image_set=split, devkit_path=os.path.join('datasets', 'voc_cityscapes')))
 
-for split in ['cityscapes_train', 'foggy_train']:
-    for data_percentage_split in ['', '_1_00', '_1_01', '_1_02', '_50_0', '_50_1', '_25_0', '_25_1', '_25_2', '_25_3', '_10_0', '_10_1', '_10_2']:
-        if split == "cityscapes_train":
+for split in ['cityscapes2foggy', 'cityscapes2kitti', 'foggy', 'kitti']:
+    for data_percentage_split in ['', '_1_00', '_1_01', '_1_02', '_50_0', '_50_1', '_25_0', '_25_1', '_25_2', '_25_3', '_10_0', '_10_1', '_10_2', '_10_samples', '_10_samples_2']:
+        if split == "cityscapes2foggy":
             for shift in ['CP', 'CPR', 'R']:
-                name = "cityscapes{}_{}".format(data_percentage_split, shift)
+                name = "cityscapes2foggy{}_{}".format(data_percentage_split, shift)
                 split = "cityscapes_train"
                 __sets[name] = (lambda name=name, split=split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
+        elif split == "cityscapes2kitti":
+            for shift in ['CP', 'CPR', 'R']:
+                name = "cityscapes2kitti{}_{}".format(data_percentage_split, shift)
+                split = "cityscapes_train"
+                __sets[name] = (lambda name=name, split=split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
+        elif split == "kitti":
+            name = "kitti{}_train".format(data_percentage_split) # e.g. kitti_10_samples_train
+            split_file = "trainval"
+            dataset_name = "kitti{}".format(data_percentage_split)
+            __sets[name] = (lambda name=name, split=split_file, dataset_name=dataset_name: kitti(name=name, image_set=split, devkit_path=os.path.join('datasets', dataset_name)))
         else: # foggy train: we need foggy_train, foggy_1_00_train, foggy_1_01_train and foggy_1_02_train
             name = "foggy{}_train".format(data_percentage_split)
             split_file = "foggy_train"
-            dataset_name = "voc_cityscapes{}".format(data_percentage_split)
+            dataset_name = "voc_cityscapes2foggy{}".format(data_percentage_split)
             __sets[name] = (lambda name=name, split=split_file, dataset_name=dataset_name: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', dataset_name)))
 
 # VOC comic
