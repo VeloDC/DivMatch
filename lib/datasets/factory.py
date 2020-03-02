@@ -99,13 +99,13 @@ for split in ['cityscapes2foggy', 'cityscapes2kitti', 'foggy', 'kitti']:
         if split == "cityscapes2foggy":
             for shift in ['CP', 'CPR', 'R']:
                 name = "cityscapes2foggy{}_{}".format(data_percentage_split, shift)
-                split = "cityscapes_train"
-                __sets[name] = (lambda name=name, split=split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
+                is_split = "cityscapes_train"
+                __sets[name] = (lambda name=name, split=is_split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
         elif split == "cityscapes2kitti":
             for shift in ['CP', 'CPR', 'R']:
                 name = "cityscapes2kitti{}_{}".format(data_percentage_split, shift)
-                split = "cityscapes_train"
-                __sets[name] = (lambda name=name, split=split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
+                is_split = "cityscapes_train"
+                __sets[name] = (lambda name=name, split=is_split: cityscapes(name=name, image_set=split, devkit_path=os.path.join('datasets', 'voc_{}'.format(name))))
         elif split == "kitti":
             name = "kitti{}_train".format(data_percentage_split) # e.g. kitti_10_samples_train
             split_file = "trainval"
@@ -133,6 +133,7 @@ for split in ['trainval']:
 def get_imdb(name):
   """Get an imdb (image database) by name."""
   if name not in __sets:
+    print(__sets.keys())
     raise KeyError('Unknown dataset: {}'.format(name))
   return __sets[name]()
 
