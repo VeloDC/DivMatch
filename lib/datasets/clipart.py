@@ -306,6 +306,7 @@ class clipart(imdb):
         print('VOC07 metric? ' + ('Yes' if use_07_metric else 'No'))
         if not os.path.isdir(output_dir):
             os.mkdir(output_dir)
+        count = 0
         for i, cls in enumerate(self._classes):
             if cls == '__background__':
                 continue
@@ -314,11 +315,16 @@ class clipart(imdb):
                 # filename, annopath, imagesetfile, cls, cachedir, ovthresh=0.3,
                 filename, annopath, imagesetfile, cls, cachedir, ovthresh=0.5,
                 use_07_metric=use_07_metric)
-            aps += [ap]
+            if ap >= 0:
+                aps += [ap]
+                count += 1
             print('AP for {} = {:.4f}'.format(cls, ap))
-            with open(os.path.join(output_dir, cls + '_pr.pkl'), 'wb') as f:
-                pickle.dump({'rec': rec, 'prec': prec, 'ap': ap}, f)
-        print('Mean AP = {:.4f}'.format(np.mean(aps)))
+            #with open(os.path.join(output_dir, cls + '_pr.pkl'), 'wb') as f:
+            #    pickle.dump({'rec': rec, 'prec': prec, 'ap': ap}, f)
+        tot_ap = 0
+        for ap in aps:
+            tot_ap += ap
+        print('Mean AP = {:.4f}'.format(tot_ap/count))
         print('~~~~~~~~')
         print('Results:')
         for ap in aps:

@@ -144,6 +144,8 @@ def voc_eval(detpath,
                              'difficult': difficult,
                              'det': det}
 
+  if npos == 0:
+      return 0,0,-1
   # read dets
   detfile = detpath.format(classname)
   with open(detfile, 'r') as f:
@@ -171,7 +173,6 @@ def voc_eval(detpath,
       bb = BB[d, :].astype(float)
       ovmax = -np.inf
       BBGT = R['bbox'].astype(float)
-
       if BBGT.size > 0:
         # compute overlaps
         # intersection
@@ -191,7 +192,8 @@ def voc_eval(detpath,
         overlaps = inters / uni
         ovmax = np.max(overlaps)
         jmax = np.argmax(overlaps)
-
+      #else: 
+      #  return 0,0, -1
       if ovmax > ovthresh:
         if not R['difficult'][jmax]:
           if not R['det'][jmax]:

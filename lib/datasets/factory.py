@@ -47,7 +47,7 @@ for split in ['trainval']:
 
 # AMD  test splits
 for split in ['test']:
-    data_percentage_split = ''
+  for data_percentage_split in ['', '_10_0', '_10_1']:
     name = 'clipart{}_{}'.format(data_percentage_split, split)
     __sets[name] = (lambda split=split, data_percentage_split=data_percentage_split: clipart('clipart{}'.format(data_percentage_split), split, devkit_path=os.path.join('datasets/', 'clipart{}'.format(data_percentage_split))))
 
